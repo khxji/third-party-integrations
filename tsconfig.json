@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2019",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+
+    /* Modules */
+    "rootDir": "./",                                 /* Specify the root folder within your source files. */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    /* Emit */
+    "outDir": "./dist",           
+    "noEmit": true,                        /* Do not emit JS files, use tsc only for typechecking */
+
+    /* Type Checking */
+    "noUncheckedIndexedAccess": true,                 /* Add 'undefined' to a type when accessed using an index. */
+    "exactOptionalPropertyTypes": false,
+    "allowJs": true
+  },
+  "include": ["index.node.ts", "src/**/*.ts"],
+  "extends": "@tsconfig/strictest/tsconfig.json"
+}

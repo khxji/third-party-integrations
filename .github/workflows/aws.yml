@@ -1,0 +1,37 @@
+name: Deploy AWS Lambda
+on: 
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build and deploy lambda
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 'main'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.x
+
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build:aws
+
+      - name: Zip lambda bundle
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r -j bundle.zip dist
+
+      - name: Deploy lambda
+        uses: appleboy/lambda-action@v0.2.0
+        with:
+          aws_access_key_id: ${{ secrets.AWS_LAMBDA_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_LAMBDA_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_LAMBDA_REGION }}
+          function_name: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
+          zip_file: bundle.zip
+          runtime: nodejs22.x
