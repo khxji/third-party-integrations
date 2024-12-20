@@ -6,7 +6,7 @@ To run this application, you must set the following environment variables in you
 
 - **STRIPE_WEBHOOK_SECRET**: Your Stripe webhook secret, used to verify the authenticity of incoming Stripe events.
 - **CRYPTLEX_PRODUCT_ID**: The Cryptlex Product ID corresponding to the license you want to create or renew.
-- **CRYPTLEX_ACCESS_TOKEN**: A valid Cryptlex API access token, used to authenticate requests to the Cryptlex API.
+- **CRYPTLEX_ACCESS_TOKEN**: A valid Cryptlex API access token with the `license:read`, `license:write`, `user:read`, `user:write` permissions; used to authenticate requests to the Cryptlex API.
 
 ## Installation & Usage
 This project provides two preconfigured deployment targets based on your runtime environment:
