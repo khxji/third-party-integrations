@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: 'npm'
+    # Look for `package.json` and `lock` files in the `root` directory
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    target-branch: 'main'
+    commit-message:
+      prefix: 'ci(dependabot)'
+      include: 'scope'
