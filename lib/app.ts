@@ -4,6 +4,7 @@ import { env } from 'hono/adapter';
 import { getAuthMiddleware } from './client';
 import { handleInvoicePaid } from './handlers/handleInvoicePaid';
 import { handleCheckoutSessionFlow } from './handlers/handleCheckoutSession';
+import { handleCustomerCreated } from './handlers/handleCustomerCreated';
 import createClient from 'openapi-fetch';
 import { paths } from '@cryptlex/web-api-types';
 
@@ -55,6 +56,9 @@ app.post('/v1', async (context) => {
                 return context.json(result, result.status);
             case 'checkout.session.completed':
                 result = await handleCheckoutSessionFlow({ event: event, productId: CRYPTLEX_PRODUCT_ID, client: CtlxClient });
+                return context.json(result, result.status);
+            case 'customer.created':
+                result = await handleCustomerCreated({ event: event, client: CtlxClient });
                 return context.json(result, result.status);
             default:
                 throw Error(`Webhook with event type ${event.type} is not supported.`);

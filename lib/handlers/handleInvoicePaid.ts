@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { HandlerReturn } from "..";
 import { getSubscriptionId, SUBCRIPTION_ID_KEY } from "../utils/getSubscriptionId";
 import { CtlxClientType } from "../client";
-import { upsertUser } from "../utils/upsertUser";
+import { insertUser } from "../utils/userActions";
 
 
 export async function handleInvoicePaid({ event, productId, client }: { event: Stripe.InvoicePaidEvent, productId: string, client: CtlxClientType }): HandlerReturn {
@@ -16,7 +16,7 @@ export async function handleInvoicePaid({ event, productId, client }: { event: S
     if (invoice.status == "paid" && invoice.billing_reason == "subscription_create") {
         const email = invoice.customer_email;
         const userName = invoice.customer_name ?? `Stripe Invoice ${invoice.id}`;
-        const userId = await upsertUser(email, userName, client);
+        const userId = await insertUser(email, userName, client);
 
         const license = await client.POST('/v3/licenses', {
             body: {
