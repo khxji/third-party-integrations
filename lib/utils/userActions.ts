@@ -63,9 +63,12 @@ async function updateUser(userId: string, customerName: string, client: CtlxClie
  */
 export async function insertUser(email: string, customerName: string, client: CtlxClientType): Promise<string> {
     let userId: string | null = null
+
+    // Check if user already exists in Cryptlex Users
     userId = await checkUserExists(email, client);
     if (!userId) {
         try {
+            // If user with this email doesn't already exist, create a new one 
             userId = await createUser(email, customerName, client);
         }
         catch (error) {
