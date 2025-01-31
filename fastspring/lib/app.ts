@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import crypto from 'crypto';
-// import { env } from "hono/adapter";
 import createClient from "openapi-fetch";
 import { paths } from "@cryptlex/web-api-types";
 import { getAuthMiddleware } from "../..//utils/client.js"
@@ -25,12 +24,12 @@ app.post("/v1", async (context) => {
      * To prevent the endpoint from attacks from malicious third parties spoofing fastspring webhooks event, we issue a secret
      *  and verify all the events. https://developer.fastspring.com/reference/message-security
      */
-    const { CRYPTLEX_ACCESS_TOKEN, WEB_API_BASE_URL, FASTSPRING_WEBHOOK_SECRET } = env(context);
+    const { CRYPTLEX_ACCESS_TOKEN, CRYPTLEX_WEB_API_BASE_URL, FASTSPRING_WEBHOOK_SECRET } = env(context);
 
     if (typeof (CRYPTLEX_ACCESS_TOKEN) !== 'string') {
       throw Error('CRYPTLEX_ACCESS_TOKEN was not found in environment variables.');
     }
-    if (typeof (WEB_API_BASE_URL) !== 'string') {
+    if (typeof (CRYPTLEX_WEB_API_BASE_URL) !== 'string') {
       throw Error('API_BASE_URL was not found in environment variables.');
     }
     if (typeof (FASTSPRING_WEBHOOK_SECRET) !== 'string') {
@@ -38,12 +37,12 @@ app.post("/v1", async (context) => {
     }
 
     const CtlxClient = createClient<paths>({
-      baseUrl: WEB_API_BASE_URL,
+      baseUrl: CRYPTLEX_WEB_API_BASE_URL,
     });
     /** Register middleware for authentication */
     CtlxClient.use(getAuthMiddleware(CRYPTLEX_ACCESS_TOKEN));
 
-    const fsSignature = context.req.header('x-fs-signature'); // equivalent to req.headers['x-fs-signature']
+    const fsSignature = context.req.header('x-fs-signature'); 
     if (!fsSignature)
     {
       throw Error('No x-fs-signature header was found.')
