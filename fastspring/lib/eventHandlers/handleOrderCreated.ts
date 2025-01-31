@@ -16,8 +16,8 @@ export async function handleOrderCreated(
   const orderCompletedData = orderCompletedEvent.data;
   if (orderCompletedData.completed && orderCompletedData.items.length > 0) {
     const userId = await insertUser(
-      orderCompletedData.customer.first,
       orderCompletedData.customer.email,
+      orderCompletedData.customer.first,
       client,
     );
     const item = orderCompletedData.items[0];
