@@ -1,8 +1,9 @@
 import Stripe from "stripe";
-import { HandlerReturn } from "..";
-import { CtlxClientType } from "../client";
+import { HandlerReturn } from "../../../utils";
+import { CtlxClientType } from "../../../utils/client";
 import { getSubscriptionId, SUBCRIPTION_ID_KEY } from "../utils/getSubscriptionId";
-import { insertUser } from '../utils/userActions';
+import { insertUser } from '../../../utils/userActions';
+import { createLicense } from "../../../utils/licenseActions";
 
 export async function handleCheckoutSessionFlow({ event, productId, client }: { event: Stripe.CheckoutSessionCompletedEvent, productId: string, client: CtlxClientType }): HandlerReturn {
     const email = event.data.object.customer_email ?? event.data.object.customer_details?.email;
@@ -14,8 +15,7 @@ export async function handleCheckoutSessionFlow({ event, productId, client }: { 
     const userId = await insertUser(email, userName, client);
     const subscriptionId = getSubscriptionId(event.data.object.subscription);
 
-    const license = await client.POST('/v3/licenses', {
-        body: {
+    const body =  {
             productId: productId,
             userId: userId,
             metadata: [
@@ -27,11 +27,6 @@ export async function handleCheckoutSessionFlow({ event, productId, client }: { 
 
             ]
         }
-    })
 
-    if (license.error) {
-        throw Error(`License creation failed with error: ${license.error.code} ${license.error.message}. User with ID ${userId} has been created.`);
-    }
-
-    return { message: "License created successfully.", data: { license: license.data }, status: 201 };
+   return await createLicense(client,body)
 }

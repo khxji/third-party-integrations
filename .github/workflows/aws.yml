@@ -6,6 +6,9 @@ jobs:
   deploy:
     name: Build and deploy lambda
     runs-on: ubuntu-latest
+     strategy:
+      matrix:
+        payment-platform: ['stripe', 'fastspring']
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,7 +22,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm ci
-          npm run build:aws
+          npm run build:${{ matrix.payment-platform }}:aws
 
       - name: Zip lambda bundle
         uses: montudor/action-zip@v1

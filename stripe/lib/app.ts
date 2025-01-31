@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { Stripe } from 'stripe';
 import { env } from 'hono/adapter';
-import { getAuthMiddleware } from './client';
+import { getAuthMiddleware } from '../../utils/client';
 import { handleInvoicePaid } from './handlers/handleInvoicePaid';
 import { handleCheckoutSessionFlow } from './handlers/handleCheckoutSession';
 import { handleCustomerCreated } from './handlers/handleCustomerCreated';

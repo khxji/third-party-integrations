@@ -1,8 +1,8 @@
 import Stripe from "stripe";
-import { HandlerReturn } from "..";
+import { HandlerReturn } from "../../../utils";
 import { getSubscriptionId, SUBCRIPTION_ID_KEY } from "../utils/getSubscriptionId";
-import { CtlxClientType } from "../client";
-import { insertUser } from "../utils/userActions";
+import { CtlxClientType } from "../../../utils/client";
+import { insertUser } from "../../../utils/userActions";
 
 
 export async function handleInvoicePaid({ event, productId, client }: { event: Stripe.InvoicePaidEvent, productId: string, client: CtlxClientType }): HandlerReturn {
