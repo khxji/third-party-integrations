@@ -2,12 +2,12 @@ import { Hono } from "hono";
 import crypto from 'crypto';
 import createClient from "openapi-fetch";
 import { paths } from "@cryptlex/web-api-types";
-import { getAuthMiddleware } from "../..//utils/client.js"
 import { handleOrderCreated } from "./eventHandlers/handleOrderCreated";
 import { handleSubscriptionDeactivated } from "./eventHandlers/handleSubscriptionDeactivated";
 import { handleSubscriptionChargeCompleted } from "./eventHandlers/handleSubscriptionChargeCompleted";
 import { handleSubscriptionPaymentOverdue } from "./eventHandlers/handleSubscriptionPaymentOverdue";
 import { env } from "hono/adapter";
+import { getAuthMiddleware } from "@shared-utils/client";
 
 function isValidSignature(body:any, signature:string, secret:string) {
   const computedSignature = crypto

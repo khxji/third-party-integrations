@@ -1,7 +1,7 @@
-import { CtlxClientType } from "../../../utils/client.js";
-import { getLicenseId } from "../../../utils/licenseActions.js";
-import { HandlerReturn } from "../../../utils";
+import { HandlerReturn } from "@shared-utils/index.js";
 import { SUBSCRIPTION_ID_METADATA_KEY } from "../utils/getCustomAttributes.js";
+import { getLicenseId } from "@shared-utils/licenseActions.js";
+import { CtlxClientType } from "@shared-utils/client.js";
 
 export async function handleSubscriptionChargeCompleted(
   client: CtlxClientType,

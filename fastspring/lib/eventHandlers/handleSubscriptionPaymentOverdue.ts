@@ -1,6 +1,6 @@
-import { CtlxClientType } from"../../../utils/client.js";
-import { getLicenseId } from "../../../utils/licenseActions.js";
-import { HandlerReturn } from "../../../utils";
+import { CtlxClientType } from "@shared-utils/client.js";
+import { HandlerReturn } from "@shared-utils/index.js";
+import { getLicenseId } from "@shared-utils/licenseActions.js";
 import { SUBSCRIPTION_ID_METADATA_KEY } from "../utils/getCustomAttributes.js";
 
 

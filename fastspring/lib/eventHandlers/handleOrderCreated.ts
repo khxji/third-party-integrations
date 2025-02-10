@@ -1,9 +1,9 @@
-;
+import { CtlxClientType } from "@shared-utils/client";
+import { HandlerReturn } from "@shared-utils/index";
+import { createLicense } from "@shared-utils/licenseActions";
+import { insertUser } from "@shared-utils/userActions";
 import { getCustomAttributes, ORDER_ID_METADATA_KEY, SUBSCRIPTION_ID_METADATA_KEY } from "../utils/getCustomAttributes";
-import { HandlerReturn } from "../../../utils";
-import { insertUser } from "../../../utils/userActions";
-import { CtlxClientType } from "../../../utils/client";
-import { createLicense } from "../../../utils/licenseActions";
+
 
 /**
  * Create a license on order.completed event (handles both one time and subscription based licenses)

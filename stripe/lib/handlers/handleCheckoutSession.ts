@@ -1,9 +1,10 @@
 import Stripe from "stripe";
-import { HandlerReturn } from "../../../utils";
-import { CtlxClientType } from "../../../utils/client";
 import { getSubscriptionId, SUBCRIPTION_ID_KEY } from "../utils/getSubscriptionId";
-import { insertUser } from '../../../utils/userActions';
-import { createLicense } from "../../../utils/licenseActions";
+import { CtlxClientType } from "@shared-utils/client";
+import { HandlerReturn } from "@shared-utils/index";
+import { createLicense } from "@shared-utils/licenseActions";
+import { insertUser } from "@shared-utils/userActions";
+
 
 export async function handleCheckoutSessionFlow({ event, productId, client }: { event: Stripe.CheckoutSessionCompletedEvent, productId: string, client: CtlxClientType }): HandlerReturn {
     const email = event.data.object.customer_email ?? event.data.object.customer_details?.email;

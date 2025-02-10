@@ -1,8 +1,10 @@
-# @cryptlex/payment-platform-integration
-Integration of follwing paymnet platforms with cryptlex:
-Stripe
-Fastspring
+# Cryptlex Payment Platform Integrations
 
-The deatiled information about the integration including setup instructions are present in respective folders
+This repository contains the integration details for the following payment platforms with Cryptlex:
+
+- **Stripe**
+- **FastSpring**
+
+Each payment platform integration is encapsulated in a dedicated module, providing comprehensive setup instructions, configuration details, and a list of supported webhook events.
 
 
