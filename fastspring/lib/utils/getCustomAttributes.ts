@@ -1,11 +1,11 @@
 export function getCustomAttributes(item: any) {
     const customAttributes = item.attributes;
     const productId = customAttributes?.cryptlex_product_id;
-    const licensePolicyId = customAttributes?.cryptlex_license_policy_id;
-    if (typeof productId === "string" && typeof licensePolicyId === "string") {
+    const licenseTemplateId = customAttributes?.cryptlex_license_template_id;
+    if (typeof productId === "string" && typeof licenseTemplateId === "string") {
         return {
             productId,
-            licensePolicyId,
+            licenseTemplateId,
         };
     } else {
         throw Error(`Attribute type does not conform to the required type for custom attribute of product: ${item.product} `);

@@ -23,7 +23,7 @@ export async function handleOrderCreated(
     const item = orderCompletedData.items[0];
     const ids: {
       productId: string;
-      licensePolicyId: string;
+      licenseTemplateId: string;
     } = getCustomAttributes(item);
     let metadata;
 
@@ -45,10 +45,11 @@ export async function handleOrderCreated(
         },
       ];
     }
+  
 
     const body = {
       productId: ids.productId,
-      licensePolicyId: ids.licensePolicyId,
+      licenseTemplateId: ids.licenseTemplateId,
       metadata: metadata,
       userId: userId,
     };
