@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm ci
-          npm run build:${{ input.payment-platform }}:aws
+          npm run build:${{ inputs.payment-platform }}:aws
 
       - name: Zip lambda bundle
         uses: montudor/action-zip@v1
